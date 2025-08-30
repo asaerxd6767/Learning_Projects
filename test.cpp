@@ -43,11 +43,35 @@ class UserManager
             for(int i = 0; i < users.size(); i++)
                 if(users[i].getUsername() == name && users[i].getPassword() == pass)
                 {
-                    cout << "---Login Successfully---" << endl;
+                    cout << "\t\t---Login Successfully---" << endl;
                     return true;
                 }
-            cout << "invalid username or password..." << endl;
+            cout << "\t\t---invalid username or password---" << endl;
             return false;
+        }
+        void ShowUser(){
+            cout << "---Users List---" << endl;
+            for(int i = 0; i < users.size(); i++)
+                cout << i + 1 << ". " << users[i].getUsername() << endl;
+        }
+        void SearchUser(string username){
+            for(int i = 0; i < users.size(); i++)
+                if(users[i].getUsername() == username)
+                {
+                    cout << "\t\t---User Found---" << endl;
+                    return;
+                }
+                else if(i == users.size() - 1)
+                    cout << "\t\t---User is not found---" << endl;
+        }
+        void DeleteUser(string username){
+            for(int i = 0; i < users.size(); i++)
+                if(users[i].getUsername() == username)
+                {
+                    users.erase(users.begin() + i);
+                    cout << "\t\t---User is deleted---" << endl;
+                    return;
+                }
         }
 };
 
@@ -69,9 +93,12 @@ main(){
     cin >> op;
     switch(op){
         case 1:
+        {
             usermanager.RegisterUser();
             break;
+        }
         case 2:
+        {
             string username, password;
             cout << "Enter user: ";
             cin >> username;
@@ -79,6 +106,30 @@ main(){
             cin >> password;
             usermanager.LoginUser(username, password);
             break;
+        }
+        case 3:
+        {
+            usermanager.ShowUser();
+            break;
+        }
+        case 4:
+        {
+            string username;
+            cout << "Enter User: ";
+            cin >> username;
+            usermanager.SearchUser(username);
+            break;
+        }
+        case 5:
+        {
+            string username;
+            cout << "Enter User: ";
+            cin >> username;
+            usermanager.DeleteUser(username);
+            break;
+        }
+        case 6:
+            exit(1);
     }
     cout << "Do you want to continue? (y / n): ";
     cin >> choice;
