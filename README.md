@@ -1,1 +1,1 @@
-This project for user login, register!
+This project for user login, register
